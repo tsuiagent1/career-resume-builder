@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>求職錦囊・智慧履歷互動生成系統</title>
+  <title>求職錦囊・智慧履歷互動生成系統 (高階經理人 STAR 實戰版)</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- docx.js UMD -->
@@ -50,14 +50,19 @@
           求職錦囊・智慧履歷互動生成系統
           <span class="text-xs bg-blue-500/30 text-blue-300 font-medium px-2 py-0.5 rounded border border-blue-400/30">STAR 法則實戰版</span>
         </h1>
-        <p class="text-xs text-slate-400">依據求職課程錦囊（STAR 深度拆解、量化成效、JD 關鍵字匹配）打造的履歷生成工具</p>
+        <p class="text-xs text-slate-400">依據求職課程錦囊（STAR 深度拆解、量化戰績、JD 關鍵字匹配）打造的高階經理人履歷工具</p>
       </div>
     </div>
 
     <!-- 頂部操作按鈕 -->
     <div class="flex items-center flex-wrap gap-2 mt-2 sm:mt-0">
-      <button onclick="loadDemoData()" class="px-3 py-1.5 text-xs bg-slate-700 hover:bg-slate-600 text-slate-200 font-medium rounded-md transition flex items-center gap-1.5 shadow-sm">
-        <i class="fa-solid fa-wand-magic-sparkles text-amber-400"></i> 載入求職範本
+      <!-- 清空欄位按鈕 -->
+      <button onclick="resetToEmpty()" class="px-3 py-1.5 text-xs bg-rose-900/80 hover:bg-rose-800 text-rose-100 font-medium rounded-md transition flex items-center gap-1.5 border border-rose-700/60 shadow-sm">
+        <i class="fa-solid fa-rotate-left"></i> 清空欄位 (空白重設)
+      </button>
+      <!-- 載入通用示範按鈕 -->
+      <button onclick="loadDemoData()" class="px-3 py-1.5 text-xs bg-amber-600 hover:bg-amber-500 text-white font-medium rounded-md transition flex items-center gap-1.5 shadow-sm">
+        <i class="fa-solid fa-wand-magic-sparkles text-amber-200"></i> 載入通用示範 (高階經理人)
       </button>
       <button onclick="saveDraftJSON()" class="px-3 py-1.5 text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-md transition flex items-center gap-1.5 border border-slate-700">
         <i class="fa-solid fa-floppy-disk"></i> 存為草稿 (JSON)
@@ -115,44 +120,44 @@
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label class="block font-semibold text-slate-700 mb-1">中文姓名 <span class="text-red-500">*</span></label>
-              <input type="text" id="field-name" oninput="updateResume()" placeholder="例如：崔永儀" class="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none">
+              <input type="text" id="field-name" oninput="updateResume()" placeholder="例如：林宏宇" class="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none">
             </div>
             <div>
               <label class="block font-semibold text-slate-700 mb-1">英文姓名 / 暱稱</label>
-              <input type="text" id="field-en-name" oninput="updateResume()" placeholder="例如：Frank Tsui" class="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none">
+              <input type="text" id="field-en-name" oninput="updateResume()" placeholder="例如：Alex Lin" class="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none">
             </div>
             <div>
               <label class="block font-semibold text-slate-700 mb-1">聯絡電話 <span class="text-red-500">*</span></label>
-              <input type="text" id="field-phone" oninput="updateResume()" placeholder="例如：0918-081-550" class="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none">
+              <input type="text" id="field-phone" oninput="updateResume()" placeholder="例如：0900-123-456" class="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none">
             </div>
             <div>
               <label class="block font-semibold text-slate-700 mb-1">電子信箱 (Email) <span class="text-red-500">*</span></label>
-              <input type="email" id="field-email" oninput="updateResume()" placeholder="例如：whps50821@gmail.com" class="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none">
+              <input type="email" id="field-email" oninput="updateResume()" placeholder="例如：alex.lin.executive@example.com" class="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none">
             </div>
             <div>
               <label class="block font-semibold text-slate-700 mb-1">所在城市 / 可工作地點</label>
-              <input type="text" id="field-location" oninput="updateResume()" placeholder="例如：台北市 / 新北市" class="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none">
+              <input type="text" id="field-location" oninput="updateResume()" placeholder="例如：台北市 / 全球遠端" class="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none">
             </div>
             <div>
               <label class="block font-semibold text-slate-700 mb-1">作品集 / LinkedIn 連結</label>
-              <input type="text" id="field-links" oninput="updateResume()" placeholder="例如：linkedin.com/in/yourname 或 作品集連結" class="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none">
+              <input type="text" id="field-links" oninput="updateResume()" placeholder="例如：linkedin.com/in/alex-lin 或 專案作品集" class="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none">
             </div>
           </div>
 
           <div class="border-t border-slate-200 pt-4">
             <label class="block font-semibold text-slate-700 mb-1">目標應聘職務 (Target Role) <span class="text-red-500">*</span></label>
-            <input type="text" id="field-target-role" oninput="updateResume()" placeholder="例如：資深營運經理 / 品牌行銷總監 / 資深專案經理" class="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none font-medium text-blue-900">
+            <input type="text" id="field-target-role" oninput="updateResume()" placeholder="例如：營運副總 / 跨國事業部總經理 / 資深策略營運總監" class="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none font-medium text-blue-900">
             <p class="text-xs text-slate-500 mt-1">建議直接填寫招募 JD 上的官方職缺名稱，能最大化提升關鍵字匹配率。</p>
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label class="block font-semibold text-slate-700 mb-1">求職型態與可到職日</label>
-              <input type="text" id="field-availability" oninput="updateResume()" placeholder="例如：全職 / 錄取後一個月內可到職" class="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none">
+              <input type="text" id="field-availability" oninput="updateResume()" placeholder="例如：全職高階經理人 / 錄取後一個月內可到職" class="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none">
             </div>
             <div>
               <label class="block font-semibold text-slate-700 mb-1">目標產業偏好</label>
-              <input type="text" id="field-industry" oninput="updateResume()" placeholder="例如：電商科技、SaaS 軟體、跨國零售" class="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none">
+              <input type="text" id="field-industry" oninput="updateResume()" placeholder="例如：跨國科技集團、AI 應用、智慧供應鏈、SaaS 企業級服務" class="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none">
             </div>
           </div>
 
@@ -180,15 +185,15 @@
             </h4>
             <div>
               <label class="block text-xs font-semibold text-slate-700 mb-1">Q1. 您的專業年資與核心專長領域為何？</label>
-              <input type="text" id="q-summary-exp" placeholder="例如：具備 8 年跨國電商與品牌整合運營經驗，專精於 0 到 1 商業閉環打造、KOL 團購與供應鏈優化" class="w-full px-3 py-1.5 text-xs border border-slate-300 rounded focus:ring-2 focus:ring-blue-500 focus:outline-none">
+              <input type="text" id="q-summary-exp" placeholder="例如：具備 12 年跨國科技與高階營運管理實務經驗，精通 0 到 1 商業模式閉環與全球供應鏈治理" class="w-full px-3 py-1.5 text-xs border border-slate-300 rounded focus:ring-2 focus:ring-blue-500 focus:outline-none">
             </div>
             <div>
               <label class="block text-xs font-semibold text-slate-700 mb-1">Q2. 職涯中最具代表性的 1~2 個商業或營運成果為何？（請包含具體數字）</label>
-              <input type="text" id="q-summary-achieve" placeholder="例如：主導 GMV 年增長 35% 專案、協助品牌降低履約成本 18%、策劃萬人規模線下實體展會" class="w-full px-3 py-1.5 text-xs border border-slate-300 rounded focus:ring-2 focus:ring-blue-500 focus:outline-none">
+              <input type="text" id="q-summary-achieve" placeholder="例如：統籌年營收 10 億級事業群，推動供應鏈與自動化改造使履約成本年降 22%，並帶動年度 GMV 逆勢增長 45%" class="w-full px-3 py-1.5 text-xs border border-slate-300 rounded focus:ring-2 focus:ring-blue-500 focus:outline-none">
             </div>
             <div>
               <label class="block text-xs font-semibold text-slate-700 mb-1">Q3. 您最獨特的個人優勢或工作特質是什麼？</label>
-              <input type="text" id="q-summary-value" placeholder="例如：具備深厚的第一線商務談判手腕與敏捷數據驅動思維，能迅速凝聚跨職能團隊達成激進成長指標" class="w-full px-3 py-1.5 text-xs border border-slate-300 rounded focus:ring-2 focus:ring-blue-500 focus:outline-none">
+              <input type="text" id="q-summary-value" placeholder="例如：具備敏捷數據驅動思維與深厚跨職能領導力，專注為高成長企業建立具備護城河的規模化營運體系" class="w-full px-3 py-1.5 text-xs border border-slate-300 rounded focus:ring-2 focus:ring-blue-500 focus:outline-none">
             </div>
             <button onclick="generateSummaryFromQ()" class="w-full py-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded font-bold text-xs shadow-sm flex items-center justify-center gap-2 transition">
               <i class="fa-solid fa-magic"></i> 智能整合成職涯專業摘要 (Summary)
@@ -198,7 +203,7 @@
           <!-- 最終摘要編輯區 -->
           <div>
             <label class="block font-semibold text-slate-700 mb-1">最終職涯亮點摘要 (Professional Summary)</label>
-            <textarea id="field-summary" rows="5" oninput="updateResume()" placeholder="在此編輯或直接由上方問答自動產生..." class="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none text-slate-800 leading-relaxed text-xs"></textarea>
+            <textarea id="field-summary" rows="5" oninput="updateResume()" placeholder="在此編輯或透過上方問答精靈一鍵生成高階職涯專業摘要..." class="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none text-slate-800 leading-relaxed text-xs"></textarea>
             <p class="text-xs text-slate-500 mt-1">建議字數控制在 120~200 字之間，段落俐落分明。</p>
           </div>
 
@@ -216,7 +221,7 @@
         <div id="tab-content-3" class="tab-pane hidden space-y-5">
           <div class="bg-emerald-50 border-l-4 border-emerald-600 p-3.5 rounded-r text-xs text-emerald-900 leading-relaxed">
             <div class="font-bold flex items-center gap-1.5 mb-1 text-emerald-950">
-              <i class="fa-solid fa-chart-line text-emerald-600"></i> 求職錦囊心法 #3：拒絕工作職責清單，只寫 STAR 量化戰績！
+              <i class="fa-solid fa-chart-line text-emerald-600"></i> 求職錦囊心法 #3：拒絕流水帳清單，只寫 STAR 量化戰績！
             </div>
             每段經歷必須用 <strong>STAR 法則</strong> 重構：<br>
             <strong>情境 (Situation)</strong> + <strong>任務 (Task)</strong> + <strong>行動 (Action)</strong> + <strong>成果 (Result，必帶數字)</strong>！
@@ -252,19 +257,19 @@
 
           <div>
             <label class="block font-semibold text-slate-700 mb-1">核心專業能力 (Domain Competencies)</label>
-            <input type="text" id="field-skills-core" oninput="updateResume()" placeholder="例如：電商營運管理、品牌 0 到 1、KOL 團購選品策略、供應鏈談判、專案管理、數據化運營" class="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none">
-            <p class="text-xs text-slate-500 mt-1">請用頓號或逗號分隔，列出 5~8 項最強項。</p>
+            <input type="text" id="field-skills-core" oninput="updateResume()" placeholder="例如：全通路營運戰略、0 到 1 商業模式閉環、跨國供應鏈架構、P&L 損益治理、大規模敏捷團隊領導、商務戰略談判" class="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none">
+            <p class="text-xs text-slate-500 mt-1">請用頓號或逗號分隔，列出 5~8 項最強專長。</p>
           </div>
 
           <div>
             <label class="block font-semibold text-slate-700 mb-1">工具、系統與技術 (Tools & Software)</label>
-            <input type="text" id="field-skills-tools" oninput="updateResume()" placeholder="例如：Google Analytics 4、Tableau、SQL、ERP/WMS、Figma、Jira、Excel 高級樞紐" class="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none">
+            <input type="text" id="field-skills-tools" oninput="updateResume()" placeholder="例如：Tableau、Power BI、SQL、SAP S/4HANA、WMS/ERP、Jira、Google Analytics 4、Python 資料分析" class="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none">
             <p class="text-xs text-slate-500 mt-1">列出你在工作上熟練操作的數位系統與生產力工具。</p>
           </div>
 
           <div>
             <label class="block font-semibold text-slate-700 mb-1">語言能力與專業證照 (Languages & Licenses)</label>
-            <input type="text" id="field-skills-lang" oninput="updateResume()" placeholder="例如：中文 (母語)、英文 (多益 880 / 商務溝通熟練)、PMP 國際專案管理師、Google 數位行銷認證" class="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none">
+            <input type="text" id="field-skills-lang" oninput="updateResume()" placeholder="例如：中文 (母語)、英文 (商務談判精通 / 多益 950)、PMP 國際專案管理師" class="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none">
           </div>
 
           <div class="flex justify-between pt-2">
@@ -283,33 +288,31 @@
             <div class="font-bold flex items-center gap-1.5 mb-1 text-indigo-950">
               <i class="fa-solid fa-graduation-cap text-indigo-600"></i> 求職錦囊心法 #5：精簡學歷，突出重大專案或領導成就
             </div>
-            若已有多年正職經驗，學歷部分著重於學校名稱、學位與畢業年份即可；新鮮人或跨領域求職者，則可補充重大畢業實作、策展或專案成果。
+            若已有多年高階經驗，學歷著重於校名、學位與年份即可；可補充重大跨國戰略專案或領導成果。
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label class="block font-semibold text-slate-700 mb-1">學校名稱</label>
-              <input type="text" id="field-edu-school" oninput="updateResume()" placeholder="例如：中國文化大學 / 國立政治大學" class="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none">
+              <input type="text" id="field-edu-school" oninput="updateResume()" placeholder="例如：國立臺灣大學 / 國立政治大學" class="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none">
             </div>
             <div>
               <label class="block font-semibold text-slate-700 mb-1">學系與學位</label>
-              <input type="text" id="field-edu-degree" oninput="updateResume()" placeholder="例如：廣告學系 學士 / 企管研究所 碩士" class="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none">
+              <input type="text" id="field-edu-degree" oninput="updateResume()" placeholder="例如：企業管理研究所 碩士 / 國際企業學系 學士" class="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none">
             </div>
             <div>
               <label class="block font-semibold text-slate-700 mb-1">就讀年份 (起訖)</label>
-              <input type="text" id="field-edu-year" oninput="updateResume()" placeholder="例如：2020 - 2024" class="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none">
+              <input type="text" id="field-edu-year" oninput="updateResume()" placeholder="例如：2014 - 2016" class="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none">
             </div>
             <div>
               <label class="block font-semibold text-slate-700 mb-1">在學成就 / 榮譽事項 (可選)</label>
-              <input type="text" id="field-edu-honor" oninput="updateResume()" placeholder="例如：2024 年文化廣告畢業展總策展人、書卷獎" class="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none">
+              <input type="text" id="field-edu-honor" oninput="updateResume()" placeholder="例如：院級傑出研究生論文獎、國際商管個案競賽全國冠軍" class="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none">
             </div>
           </div>
 
           <div>
             <label class="block font-semibold text-slate-700 mb-1">其他重要專案 / 著作 / 專利 / 實戰作品 (可選)</label>
-            <textarea id="field-projects" rows="3" oninput="updateResume()" placeholder="例如：
-- 統籌信義新光三越 A9 為期三天實體品牌特展，累積突破 15,000 人次觀展
-- 主持跨國電競產品進出口法規評估專案，撰寫 SMART 策略架構並節省 3 萬美元成本" class="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none text-xs"></textarea>
+            <textarea id="field-projects" rows="3" oninput="updateResume()" placeholder="例如：&#10;- 主導跨國供應鏈端到端數位化改造專案，導入預測性備貨演算法，年節省呆滯料損失逾新台幣 2,500 萬元&#10;- 領導 40 人跨國業務與營運團隊推動亞太雙向擴張計畫，於 9 個月內達成單月損益平衡" class="w-full px-3 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none text-xs"></textarea>
           </div>
 
           <div class="flex justify-between pt-4 border-t border-slate-200">
@@ -326,15 +329,44 @@
 
       </div>
 
-      <!-- 底部健康檢查指示條 -->
-      <div class="no-print bg-slate-100 border-t border-slate-200 px-6 py-2.5 flex items-center justify-between text-xs">
-        <div class="flex items-center space-x-2">
-          <span class="font-bold text-slate-700">錦囊指標評分：</span>
-          <span id="resume-score-badge" class="px-2 py-0.5 rounded font-bold bg-amber-100 text-amber-800">65 分 (待完善)</span>
-          <span id="resume-score-tip" class="text-slate-500 hidden sm:inline">請檢查是否已包含目標職位與量化數字</span>
+      <!-- 底部健康檢查指示條：STAR 品質評分雷達 -->
+      <div class="no-print bg-slate-100 border-t border-slate-200 px-6 py-3 text-xs space-y-2">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-2">
+            <span class="font-bold text-slate-800 flex items-center gap-1.5">
+              <i class="fa-solid fa-chart-pie text-blue-600"></i> 求職錦囊品質雷達：
+            </span>
+            <span id="resume-score-badge" class="px-2.5 py-0.5 rounded font-bold bg-slate-200 text-slate-700">0 分 (尚未填寫)</span>
+          </div>
+          <div class="text-slate-400 text-[11px]">
+            依錦囊高階經理人規範設計
+          </div>
         </div>
-        <div class="text-slate-400 text-[11px]">
-          由 Frank 秘書依錦囊架構為崔董專屬建構
+        <!-- 維度指標進度列 -->
+        <div class="grid grid-cols-5 gap-1.5 pt-1 text-[10px] text-slate-600">
+          <div>
+            <div class="flex justify-between mb-0.5"><span>基本定位</span><span id="radar-dim-1">0/20</span></div>
+            <div class="w-full bg-slate-200 rounded-full h-1.5"><div id="bar-dim-1" class="bg-blue-600 h-1.5 rounded-full" style="width: 0%"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between mb-0.5"><span>目標鎖定</span><span id="radar-dim-2">0/15</span></div>
+            <div class="w-full bg-slate-200 rounded-full h-1.5"><div id="bar-dim-2" class="bg-blue-600 h-1.5 rounded-full" style="width: 0%"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between mb-0.5"><span>摘要說服力</span><span id="radar-dim-3">0/20</span></div>
+            <div class="w-full bg-slate-200 rounded-full h-1.5"><div id="bar-dim-3" class="bg-blue-600 h-1.5 rounded-full" style="width: 0%"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between mb-0.5"><span>STAR量化</span><span id="radar-dim-4">0/35</span></div>
+            <div class="w-full bg-slate-200 rounded-full h-1.5"><div id="bar-dim-4" class="bg-blue-600 h-1.5 rounded-full" style="width: 0%"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between mb-0.5"><span>ATS技能</span><span id="radar-dim-5">0/10</span></div>
+            <div class="w-full bg-slate-200 rounded-full h-1.5"><div id="bar-dim-5" class="bg-blue-600 h-1.5 rounded-full" style="width: 0%"></div></div>
+          </div>
+        </div>
+        <div id="resume-score-tip" class="text-slate-500 text-[11px] pt-0.5">
+          請在左側輸入履歷資料，或點選頂部「載入通用示範」快速檢視高階經理人黃金標準範例。
         </div>
       </div>
     </section>
@@ -347,17 +379,17 @@
 
         <!-- 履歷頂部 Header -->
         <header class="border-b-2 border-slate-800 pb-5 mb-5 text-center">
-          <h1 id="pv-name" class="text-2xl md:text-3xl font-extrabold tracking-wider text-slate-900">崔永儀 (Frank Tsui)</h1>
-          <div id="pv-target-role" class="text-sm md:text-base font-bold text-blue-700 mt-1 uppercase tracking-wide">資深營運經理 (Senior Operations Manager)</div>
+          <h1 id="pv-name" class="text-2xl md:text-3xl font-extrabold tracking-wider text-slate-300">候選人姓名</h1>
+          <div id="pv-target-role" class="text-sm md:text-base font-bold text-blue-400/50 mt-1 uppercase tracking-wide">目標應聘職務 (尚未填寫)</div>
           
-          <div id="pv-contact-bar" class="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs text-slate-600 mt-2.5 font-medium">
-            <span id="pv-phone"><i class="fa-solid fa-phone text-slate-400 mr-1"></i>0918-081-550</span>
+          <div id="pv-contact-bar" class="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs text-slate-400 mt-2.5 font-medium">
+            <span id="pv-phone"><i class="fa-solid fa-phone text-slate-300 mr-1"></i>聯絡電話</span>
             <span class="text-slate-300">|</span>
-            <span id="pv-email"><i class="fa-solid fa-envelope text-slate-400 mr-1"></i>whps50821@gmail.com</span>
+            <span id="pv-email"><i class="fa-solid fa-envelope text-slate-300 mr-1"></i>電子信箱</span>
             <span class="text-slate-300">|</span>
-            <span id="pv-location"><i class="fa-solid fa-location-dot text-slate-400 mr-1"></i>台北市 / 新北市</span>
+            <span id="pv-location"><i class="fa-solid fa-location-dot text-slate-300 mr-1"></i>所在城市</span>
             <span class="text-slate-300">|</span>
-            <span id="pv-links"><i class="fa-solid fa-link text-slate-400 mr-1"></i>作品集 / LinkedIn</span>
+            <span id="pv-links"><i class="fa-solid fa-link text-slate-300 mr-1"></i>作品集 / LinkedIn</span>
           </div>
         </header>
 
@@ -367,8 +399,8 @@
             <span>專業職涯摘要 (PROFESSIONAL SUMMARY)</span>
             <span class="text-[10px] text-blue-600 font-normal tracking-normal lowercase">★ 錦囊核心重點</span>
           </h2>
-          <p id="pv-summary-text" class="text-xs text-slate-700 leading-relaxed text-justify">
-            具備 8 年跨國電商與品牌整合運營實務經驗，擅長從 0 到 1 打造爆款商業模式、KOL 團購選品策略及數據化營運指標體系。曾主導大型電商平台 GMV 年增長 35% 專案，並透過供應鏈流程優化協助企業降低履約成本 18%。具備敏捷數據驅動思維與跨部門高壓協調力，專注為企業創造可衡量的商業爆發力。
+          <p id="pv-summary-text" class="text-xs text-slate-400 italic leading-relaxed text-justify">
+            （尚未填寫職涯摘要，請在左側輸入或使用問答導引精靈一鍵生成）
           </p>
         </section>
 
@@ -380,15 +412,15 @@
           <div class="text-xs space-y-1.5 text-slate-700">
             <div id="pv-skills-core-row" class="flex items-start">
               <span class="font-bold text-slate-900 w-28 shrink-0">領域專長：</span>
-              <span id="pv-skills-core" class="flex-1">電商營運管理、品牌 0 到 1、KOL 團購選品策略、供應鏈談判、專案管理、數據化運營</span>
+              <span id="pv-skills-core" class="flex-1 text-slate-400 italic">待補充</span>
             </div>
             <div id="pv-skills-tools-row" class="flex items-start">
               <span class="font-bold text-slate-900 w-28 shrink-0">工具與軟體：</span>
-              <span id="pv-skills-tools" class="flex-1">Google Analytics 4、Tableau、SQL、ERP/WMS、Figma、Jira、Excel 高級樞紐</span>
+              <span id="pv-skills-tools" class="flex-1 text-slate-400 italic">待補充</span>
             </div>
             <div id="pv-skills-lang-row" class="flex items-start">
               <span class="font-bold text-slate-900 w-28 shrink-0">語言與證照：</span>
-              <span id="pv-skills-lang" class="flex-1">中文 (母語)、英文 (商務溝通熟練 / 多益 880)、PMP 國際專案管理師</span>
+              <span id="pv-skills-lang" class="flex-1 text-slate-400 italic">待補充</span>
             </div>
           </div>
         </section>
@@ -399,7 +431,7 @@
             專業工作經歷 (PROFESSIONAL EXPERIENCE)
           </h2>
           <div id="pv-experience-container" class="space-y-4">
-            <!-- 動態填入預覽經歷項目 -->
+            <div class="text-xs text-slate-400 italic">尚未新增工作經歷。請於左側點擊「新增一段工作經歷」或頂部點擊「載入通用示範」快速帶入高階範例。</div>
           </div>
         </section>
 
@@ -410,11 +442,11 @@
           </h2>
           <div class="flex justify-between items-start text-xs text-slate-800">
             <div>
-              <span id="pv-edu-school" class="font-bold text-slate-900">中國文化大學</span> — 
-              <span id="pv-edu-degree" class="text-slate-700">廣告學系 學士</span>
-              <div id="pv-edu-honor" class="text-[11px] text-blue-700 font-medium mt-0.5">重大實作：2024 年文化廣告畢業展總策展人（新光三越 A9 實體展覽）</div>
+              <span id="pv-edu-school" class="font-bold text-slate-400">學校名稱</span> <span class="text-slate-300">—</span> 
+              <span id="pv-edu-degree" class="text-slate-400">學系學位</span>
+              <div id="pv-edu-honor" class="text-[11px] text-blue-700 font-medium mt-0.5 hidden"></div>
             </div>
-            <div id="pv-edu-year" class="text-slate-500 font-mono text-[11px]">2020 - 2024</div>
+            <div id="pv-edu-year" class="text-slate-400 font-mono text-[11px]"></div>
           </div>
         </section>
 
@@ -423,9 +455,8 @@
           <h2 class="text-xs font-bold text-slate-900 uppercase tracking-widest border-b border-slate-300 pb-1 mb-2">
             重大專案與代表實績 (KEY PROJECTS & PORTFOLIO)
           </h2>
-          <ul id="pv-projects-list" class="list-disc list-inside text-xs text-slate-700 space-y-1">
-            <li>統籌文化廣告畢業展策展，負責動線導覽、品牌公關與跨組推進，三天展期累積吸引突破 15,000 人次。</li>
-            <li>參與新興窗簾品牌「AURA」從 0 到 1 創立，規劃官方網站架構與社群內容佈局，首季獲客成長 120%。</li>
+          <ul id="pv-projects-list" class="list-disc list-inside text-xs text-slate-400 italic space-y-1">
+            <li>可填寫重要實務專案、組織轉型或跨國業務成果。</li>
           </ul>
         </section>
 
@@ -436,61 +467,87 @@
 
   <!-- 應用程式核心邏輯與 Word 產出腳本 -->
   <script>
-    // 狀態管理
-    let resumeData = {
-      name: '崔永儀',
-      enName: 'Frank Tsui',
-      phone: '0918-081-550',
-      email: 'whps50821@gmail.com',
-      location: '台北市 / 新北市',
-      links: 'linkedin.com/in/frank-tsui | 作品集',
-      targetRole: '資深營運經理 (Senior Operations Manager)',
-      availability: '全職 / 錄取後一個月內可到職',
-      industry: '電商平台、網路科技、D2C 品牌',
-      summary: '具備 8 年跨國電商與品牌整合運營實務經驗，擅長從 0 到 1 打造爆款商業模式、KOL 團購選品策略及數據化營運指標體系。曾主導大型電商平台 GMV 年增長 35% 專案，並透過供應鏈流程優化協助企業降低履約成本 18%。具備敏捷數據驅動思維與跨部門高壓協調力，專注為企業創造可衡量的商業爆發力。',
-      skillsCore: '電商營運管理、品牌 0 到 1、KOL 團購選品策略、供應鏈談判、專案管理、數據化運營',
-      skillsTools: 'Google Analytics 4、Tableau、SQL、ERP/WMS、Figma、Jira、Excel 高級樞紐',
-      skillsLang: '中文 (母語)、英文 (商務溝通熟練 / 多益 880)、PMP 國際專案管理師',
-      eduSchool: '中國文化大學',
-      eduDegree: '廣告學系 學士',
-      eduYear: '2020 - 2024',
-      eduHonor: '2024 年文化廣告畢業展總策展人（新光三越 A9 實體展覽）',
-      projects: '- 統籌文化廣告畢業展策展，負責動線導覽、品牌公關與跨組推進，三天展期累積吸引突破 15,000 人次。\n- 參與新興窗簾品牌「AURA」從 0 到 1 創立，規劃官方網站架構與社群內容佈局，首季獲客成長 120%。',
+    // 空狀態物件結構
+    const emptyResume = {
+      name: '',
+      enName: '',
+      phone: '',
+      email: '',
+      location: '',
+      links: '',
+      targetRole: '',
+      availability: '',
+      industry: '',
+      summary: '',
+      skillsCore: '',
+      skillsTools: '',
+      skillsLang: '',
+      eduSchool: '',
+      eduDegree: '',
+      eduYear: '',
+      eduHonor: '',
+      projects: '',
+      experiences: []
+    };
+
+    // 通用高階經理人示範資料（符合戰略規範、無特定人士個資）
+    const demoResume = {
+      name: '林宏宇',
+      enName: 'Alex Lin',
+      phone: '0900-123-456',
+      email: 'alex.lin.executive@example.com',
+      location: '台北市 / 全球遠端可',
+      links: 'linkedin.com/in/alex-lin-sample | portfolio.example.com',
+      targetRole: '營運副總 / 資深策略營運總監 (VP / Senior Director of Operations)',
+      availability: '全職高階經理人 / 錄取後一個月內可到職',
+      industry: '跨國科技集團、AI 應用、智慧供應鏈、SaaS 企業級服務',
+      summary: '具備 12 年跨國科技集團與高階營運管理實務經驗，精通 0 到 1 商業模式閉環打造、全球供應鏈端到端治理與組織規模化推進。曾統籌年營收 10 億級事業群，推動自動化倉儲與供應鏈改造使單件履約成本年降 22%，並帶動全站年度 GMV 逆勢增長 45%。具備深厚跨職能領導力與敏捷數據驅動思維，專注為高成長企業建立具備護城河的規模化營運體系。',
+      skillsCore: '全通路營運戰略、0 到 1 商業模式閉環、跨國供應鏈架構、P&L 損益治理、大規模敏捷團隊領導、商務戰略談判',
+      skillsTools: 'Tableau、Power BI、SQL、SAP S/4HANA、WMS/ERP、Jira、Google Analytics 4、Python 資料分析',
+      skillsLang: '中文 (母語)、英文 (商務談判精通 / 多益 950)、PMP 國際專案管理師',
+      eduSchool: '國立臺灣大學',
+      eduDegree: '企業管理研究所 碩士',
+      eduYear: '2012 - 2014',
+      eduHonor: '院級傑出研究生論文獎、國際商管個案競賽全國冠軍',
+      projects: '- 主導跨國供應鏈端到端數位化改造專案，導入預測性備貨演算法，年節省呆滯料損失逾新台幣 2,500 萬元。\n- 領導 40 人跨國業務與營運團隊推動亞太雙向擴張計畫，於 9 個月內達成單月損益平衡。',
       experiences: [
         {
-          id: 'exp-1',
-          company: '美賣科技股份有限公司 (meimaii)',
-          role: '資深營運經理 (Senior Operations Manager)',
-          period: '2024/01 ~ 至今',
+          id: 'exp-demo-1',
+          company: '跨國科技電商集團 (Global Tech E-Commerce)',
+          role: '資深營運總監 (Senior Operations Director)',
+          period: '2021/03 ~ 至今',
           isCurrent: true,
-          starS: '面對團購電商市場競爭加劇，既有倉儲物流履約成本偏高且網紅合作選品週轉率波動較大。',
-          starT: '優化全站商品庫存週轉天數，降低整體履約物流成本 15%，並推動年度 GMV 成長 30% 目標。',
-          starA: '重新設計 KOL 階梯式分潤選品機制，引入預測性備貨模型，並整合跨部門客服、倉儲與供應商交期。',
-          starR: '成功促成年 GMV 增長 35%，降低履約退貨成本 18%，打造 3 款單月破百萬營收之爆款團購選品。',
+          starS: '面對區域電商競爭加劇與通膨壓力，既有履約中心時效延遲率達 18%，且物流單件履約成本逐年攀升。',
+          starT: '重構端到端倉儲配送智慧排程系統，目標於 12 個月內將履約時效準時率提升至 98%，並壓降整體運營成本 15%。',
+          starA: '推動自動化倉儲分揀與動態派車系統導入，重新談判亞太頂級承運商合約，並成立跨職能戰情分析小組即時控管 KPI。',
+          starR: '成功促成準時配送率提升至 99.2%，單件履約成本年降 22%，帶動年度 GMV 逆勢成長 45% (突破新台幣 12 億元)。',
           bullets: [
-            '主導 KOL 團購選品與供應鏈優化專案，年度全站 GMV 逆勢成長 35%，超出原定目標 5 個百分點。',
-            '重新談判第三方倉儲物流合約並導入自動化分揀流程，將單筆訂單履約成本降低 18%，年節省逾 NT$ 120 萬。',
-            '領導 15 人跨職能營運與供應鏈團隊，建立數據化 KPI 看板，縮短爆款新品上架前置作業期達 40%。'
+            '主導亞太區端到端供應鏈與智慧物流整合工程，將單件訂單履約成本降低 22%，年化節省營運支出逾新台幣 4,800 萬元。',
+            '重構倉儲自動化分揀架構與動態庫存預警機制，將訂單出貨處理時效由 36 小時縮短至 8 小時，準時履約率達 99.2%。',
+            '統籌 50 人跨國營運、供應鏈與客戶成功團隊，建立以單位經濟 (Unit Economics) 為核心之敏捷指標體系，推動年度 GMV 增長 45%。'
           ]
         },
         {
-          id: 'exp-2',
-          company: '澳利生活研發室內裝修有限公司',
-          role: '品牌行銷企劃暨業務行政',
-          period: '2022/06 ~ 2023/12',
+          id: 'exp-demo-2',
+          company: '知名數位創新科技公司 (Digital Solutions Inc.)',
+          role: '營運經理 / 專案總監 (Operations Manager)',
+          period: '2016/08 ~ 2021/02',
           isCurrent: false,
-          starS: '公司創立新窗簾品牌「AURA」，市場知名度為零，缺乏數位接觸點與系統化銷售管道。',
-          starT: '負責 AURA 從 0 到 1 品牌建置，包含官方網站架構、社群行銷矩陣與線下體驗預約機制。',
-          starA: '深入受眾需求訪談，制定品牌定位與視覺風格，策劃首發開賣活動並整合 Google Ads 與 Meta 廣告。',
-          starR: '上線 3 個月內獲得 450+ 筆高客單價丈量預約，首年帶動新品牌營業額突破 NT$ 850 萬元。',
+          starS: '企業新創 SaaS 商業產品線處於拓展初期，客戶進線問題反饋耗時過長，初期客戶流失率達 25%。',
+          starT: '建立客戶生命週期營運管理標準化流程 (SOP)，降低首季流失率至 10% 以下，並建立客戶滿意度量化追蹤指標。',
+          starA: '導入敏捷 CRM 系統與自動化工單分派模型，建立客戶成功 (CS) 顧問團隊，主導跨產品研發部門之定期反饋閉環。',
+          starR: '客戶首季流失率自 25% 銳減至 6.8%，客戶留存淨額 (NDR) 達 128%，帶動企業年經常性收入 (ARR) 成長 180%。',
           bullets: [
-            '主導新興窗簾品牌「AURA」從 0 到 1 完整建置，統籌品牌定位、官網架構與 50+ 篇高轉換社群內容。',
-            '設計線下實體丈量體驗與線上預約系統，達成 32% 預約成交轉換率，首年度創造 NT$ 850 萬營收。',
-            '協調視覺攝影、產品型錄製作與工程端安裝排程，客戶滿意度維持在 4.9 星高水準。'
+            '從 0 到 1 打造客戶成功營運體系與自動化監控儀表板，將客戶流失率由 25% 顯著降至 6.8%，客戶滿意度達 4.9/5.0。',
+            '主導跨部門產品交付週期優化專案，將專案上線前置期由平均 45 天大幅縮減至 14 天，專案交付毛利率提升 16%。',
+            '協同商務團隊推動關鍵企業級帳戶續約與加購方案，促成年經常性收入 (ARR) 成長 180%，年續約率突破 92%。'
           ]
         }
       ]
     };
+
+    // 當前運作資料物件（初始為空）
+    let resumeData = JSON.parse(JSON.stringify(emptyResume));
 
     // 切換頁籤
     function setTab(stepIndex) {
@@ -534,9 +591,14 @@
       const container = document.getElementById('experience-list');
       container.innerHTML = '';
 
+      if (resumeData.experiences.length === 0) {
+        container.innerHTML = '<div class="bg-slate-50 border border-dashed border-slate-300 rounded-lg p-6 text-center text-slate-500 text-xs"><i class="fa-solid fa-folder-open text-2xl text-slate-300 mb-2 block"></i>尚未建立工作經歷項目。點擊下方按鈕新增經歷，或點擊頂部「載入通用示範」帶入範例。</div>';
+        return;
+      }
+
       resumeData.experiences.forEach((exp, index) => {
         const card = document.createElement('div');
-        card.className = 'bg-slate-50 border border-slate-200 rounded-lg p-4 space-y-3 relative';
+        card.className = 'bg-slate-50 border border-slate-200 rounded-lg p-4 space-y-3 relative shadow-sm';
         
         let bulletsVal = (exp.bullets || []).join('\n');
 
@@ -544,7 +606,7 @@
           <div class="flex items-center justify-between border-b border-slate-200 pb-2">
             <div class="font-bold text-slate-800 text-xs flex items-center gap-2">
               <span class="w-5 h-5 rounded-full bg-blue-600 text-white flex items-center justify-center text-[11px]">${index + 1}</span>
-              ${exp.company || '工作經歷 #' + (index + 1)}
+              ${exp.company ? exp.company : '工作經歷 #' + (index + 1)}
             </div>
             <button onclick="removeExperience('${exp.id}')" class="text-red-500 hover:text-red-700 text-xs flex items-center gap-1">
               <i class="fa-solid fa-trash-can"></i> 刪除
@@ -554,15 +616,15 @@
           <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
             <div>
               <label class="block font-semibold text-slate-700 mb-1">公司名稱</label>
-              <input type="text" value="${exp.company || ''}" oninput="updateExpField('${exp.id}', 'company', this.value)" placeholder="例如：美賣科技股份有限公司" class="w-full px-2.5 py-1.5 border border-slate-300 rounded">
+              <input type="text" value="${exp.company || ''}" oninput="updateExpField('${exp.id}', 'company', this.value)" placeholder="例如：跨國科技集團" class="w-full px-2.5 py-1.5 border border-slate-300 rounded focus:ring-1 focus:ring-blue-500">
             </div>
             <div>
               <label class="block font-semibold text-slate-700 mb-1">職稱</label>
-              <input type="text" value="${exp.role || ''}" oninput="updateExpField('${exp.id}', 'role', this.value)" placeholder="例如：資深營運經理" class="w-full px-2.5 py-1.5 border border-slate-300 rounded">
+              <input type="text" value="${exp.role || ''}" oninput="updateExpField('${exp.id}', 'role', this.value)" placeholder="例如：資深營運總監" class="w-full px-2.5 py-1.5 border border-slate-300 rounded focus:ring-1 focus:ring-blue-500">
             </div>
             <div>
               <label class="block font-semibold text-slate-700 mb-1">在職期間 (起訖年月)</label>
-              <input type="text" value="${exp.period || ''}" oninput="updateExpField('${exp.id}', 'period', this.value)" placeholder="例如：2024/01 ~ 至今" class="w-full px-2.5 py-1.5 border border-slate-300 rounded">
+              <input type="text" value="${exp.period || ''}" oninput="updateExpField('${exp.id}', 'period', this.value)" placeholder="例如：2021/03 ~ 至今" class="w-full px-2.5 py-1.5 border border-slate-300 rounded focus:ring-1 focus:ring-blue-500">
             </div>
           </div>
 
@@ -570,26 +632,26 @@
           <div class="bg-white border border-blue-200 rounded p-3 space-y-2 mt-2">
             <div class="font-bold text-blue-900 text-xs flex items-center justify-between">
               <span><i class="fa-solid fa-wand-magic-sparkles text-amber-500"></i> 求職錦囊：STAR 戰績拆解導引</span>
-              <button onclick="generateBulletFromStar('${exp.id}')" class="px-2.5 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded text-[11px] font-bold flex items-center gap-1">
+              <button onclick="generateBulletFromStar('${exp.id}')" class="px-2.5 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded text-[11px] font-bold flex items-center gap-1 transition">
                 轉為 STAR 成就條列 <i class="fa-solid fa-arrow-down"></i>
               </button>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs">
               <div>
                 <span class="font-semibold text-slate-600">S (情境挑戰)：當時面臨何種瓶頸？</span>
-                <input type="text" id="star-s-${exp.id}" value="${exp.starS || ''}" oninput="updateExpField('${exp.id}', 'starS', this.value)" placeholder="例如：倉儲成本偏高且選品週轉波動大" class="w-full px-2 py-1 text-xs border border-slate-300 rounded">
+                <input type="text" id="star-s-${exp.id}" value="${exp.starS || ''}" oninput="updateExpField('${exp.id}', 'starS', this.value)" placeholder="例如：時效延遲率達 18% 且單件履約成本高" class="w-full px-2 py-1 text-xs border border-slate-300 rounded focus:ring-1 focus:ring-blue-500">
               </div>
               <div>
                 <span class="font-semibold text-slate-600">T (目標任務)：設定何種 KPI 目標？</span>
-                <input type="text" id="star-t-${exp.id}" value="${exp.starT || ''}" oninput="updateExpField('${exp.id}', 'starT', this.value)" placeholder="例如：降低履約成本 15%，帶動 GMV 成長 30%" class="w-full px-2 py-1 text-xs border border-slate-300 rounded">
+                <input type="text" id="star-t-${exp.id}" value="${exp.starT || ''}" oninput="updateExpField('${exp.id}', 'starT', this.value)" placeholder="例如：準時率提升至 98%，降本 15%" class="w-full px-2 py-1 text-xs border border-slate-300 rounded focus:ring-1 focus:ring-blue-500">
               </div>
               <div>
                 <span class="font-semibold text-slate-600">A (關鍵行動)：採取什麼策略方案？</span>
-                <input type="text" id="star-a-${exp.id}" value="${exp.starA || ''}" oninput="updateExpField('${exp.id}', 'starA', this.value)" placeholder="例如：重構 KOL 階梯分潤模型並整合供應鏈" class="w-full px-2 py-1 text-xs border border-slate-300 rounded">
+                <input type="text" id="star-a-${exp.id}" value="${exp.starA || ''}" oninput="updateExpField('${exp.id}', 'starA', this.value)" placeholder="例如：導入自動化分揀系統與動態排程模型" class="w-full px-2 py-1 text-xs border border-slate-300 rounded focus:ring-1 focus:ring-blue-500">
               </div>
               <div>
                 <span class="font-semibold text-slate-600">R (量化成效)：產出何種具體數字？</span>
-                <input type="text" id="star-r-${exp.id}" value="${exp.starR || ''}" oninput="updateExpField('${exp.id}', 'starR', this.value)" placeholder="例如：年 GMV 逆勢成長 35%，省下 120 萬元" class="w-full px-2 py-1 text-xs border border-slate-300 rounded">
+                <input type="text" id="star-r-${exp.id}" value="${exp.starR || ''}" oninput="updateExpField('${exp.id}', 'starR', this.value)" placeholder="例如：準時率達 99.2%，成本降 22%，GMV 增長 45%" class="w-full px-2 py-1 text-xs border border-slate-300 rounded focus:ring-1 focus:ring-blue-500">
               </div>
             </div>
           </div>
@@ -597,7 +659,7 @@
           <!-- 條列成就 Bullet points 編輯 -->
           <div>
             <label class="block font-semibold text-slate-700 text-xs mb-1">最終條列成就 (Bullet Points，每行一條)</label>
-            <textarea id="bullets-${exp.id}" rows="3" oninput="updateExpBullets('${exp.id}', this.value)" placeholder="每行代表一條具備動詞與量化成效的 bullet point..." class="w-full px-2.5 py-1.5 text-xs border border-slate-300 rounded focus:ring-1 focus:ring-blue-500 font-mono">${bulletsVal}</textarea>
+            <textarea id="bullets-${exp.id}" rows="3" oninput="updateExpBullets('${exp.id}', this.value)" placeholder="每行代表一條具備強動詞與量化成效的 bullet point..." class="w-full px-2.5 py-1.5 text-xs border border-slate-300 rounded focus:ring-1 focus:ring-blue-500 font-mono">${bulletsVal}</textarea>
           </div>
         `;
         container.appendChild(card);
@@ -640,7 +702,7 @@
       if (s && a && r) {
         newBullet = '針對' + s + '之挑戰，主導' + a + '，成功達成' + r + '。';
       } else if (a && r) {
-        newBullet = '透過' + a + '，成功促成' + r + '。';
+        newBullet = '主導' + a + '，成功促成' + r + '。';
       } else {
         newBullet = a + ' ' + r;
       }
@@ -682,46 +744,90 @@
     // 同步更新右側即時預覽
     function updateResume() {
       // 讀取輸入欄位
-      resumeData.name = document.getElementById('field-name').value.trim() || '您的姓名';
-      resumeData.enName = document.getElementById('field-en-name').value.trim();
-      resumeData.phone = document.getElementById('field-phone').value.trim();
-      resumeData.email = document.getElementById('field-email').value.trim();
-      resumeData.location = document.getElementById('field-location').value.trim();
-      resumeData.links = document.getElementById('field-links').value.trim();
-      resumeData.targetRole = document.getElementById('field-target-role').value.trim() || '目標應聘職務';
-      resumeData.summary = document.getElementById('field-summary').value.trim();
-      resumeData.skillsCore = document.getElementById('field-skills-core').value.trim();
-      resumeData.skillsTools = document.getElementById('field-skills-tools').value.trim();
-      resumeData.skillsLang = document.getElementById('field-skills-lang').value.trim();
-      resumeData.eduSchool = document.getElementById('field-edu-school').value.trim();
-      resumeData.eduDegree = document.getElementById('field-edu-degree').value.trim();
-      resumeData.eduYear = document.getElementById('field-edu-year').value.trim();
-      resumeData.eduHonor = document.getElementById('field-edu-honor').value.trim();
-      resumeData.projects = document.getElementById('field-projects').value.trim();
+      resumeData.name = (document.getElementById('field-name') ? document.getElementById('field-name').value.trim() : '');
+      resumeData.enName = (document.getElementById('field-en-name') ? document.getElementById('field-en-name').value.trim() : '');
+      resumeData.phone = (document.getElementById('field-phone') ? document.getElementById('field-phone').value.trim() : '');
+      resumeData.email = (document.getElementById('field-email') ? document.getElementById('field-email').value.trim() : '');
+      resumeData.location = (document.getElementById('field-location') ? document.getElementById('field-location').value.trim() : '');
+      resumeData.links = (document.getElementById('field-links') ? document.getElementById('field-links').value.trim() : '');
+      resumeData.targetRole = (document.getElementById('field-target-role') ? document.getElementById('field-target-role').value.trim() : '');
+      resumeData.availability = (document.getElementById('field-availability') ? document.getElementById('field-availability').value.trim() : '');
+      resumeData.industry = (document.getElementById('field-industry') ? document.getElementById('field-industry').value.trim() : '');
+      resumeData.summary = (document.getElementById('field-summary') ? document.getElementById('field-summary').value.trim() : '');
+      resumeData.skillsCore = (document.getElementById('field-skills-core') ? document.getElementById('field-skills-core').value.trim() : '');
+      resumeData.skillsTools = (document.getElementById('field-skills-tools') ? document.getElementById('field-skills-tools').value.trim() : '');
+      resumeData.skillsLang = (document.getElementById('field-skills-lang') ? document.getElementById('field-skills-lang').value.trim() : '');
+      resumeData.eduSchool = (document.getElementById('field-edu-school') ? document.getElementById('field-edu-school').value.trim() : '');
+      resumeData.eduDegree = (document.getElementById('field-edu-degree') ? document.getElementById('field-edu-degree').value.trim() : '');
+      resumeData.eduYear = (document.getElementById('field-edu-year') ? document.getElementById('field-edu-year').value.trim() : '');
+      resumeData.eduHonor = (document.getElementById('field-edu-honor') ? document.getElementById('field-edu-honor').value.trim() : '');
+      resumeData.projects = (document.getElementById('field-projects') ? document.getElementById('field-projects').value.trim() : '');
 
       // 更新 Header
-      let displayName = resumeData.name;
-      if (resumeData.enName) displayName += ' (' + resumeData.enName + ')';
-      document.getElementById('pv-name').innerText = displayName;
-      document.getElementById('pv-target-role').innerText = resumeData.targetRole;
-      document.getElementById('pv-phone').innerHTML = '<i class="fa-solid fa-phone text-slate-400 mr-1"></i>' + (resumeData.phone || '0900-000-000');
-      document.getElementById('pv-email').innerHTML = '<i class="fa-solid fa-envelope text-slate-400 mr-1"></i>' + (resumeData.email || 'your-email@example.com');
-      document.getElementById('pv-location').innerHTML = '<i class="fa-solid fa-location-dot text-slate-400 mr-1"></i>' + (resumeData.location || '所在城市');
-      document.getElementById('pv-links').innerHTML = '<i class="fa-solid fa-link text-slate-400 mr-1"></i>' + (resumeData.links || '作品集 / 連結');
+      const nameEl = document.getElementById('pv-name');
+      if (resumeData.name) {
+        let displayName = resumeData.name;
+        if (resumeData.enName) displayName += ' (' + resumeData.enName + ')';
+        nameEl.innerText = displayName;
+        nameEl.className = 'text-2xl md:text-3xl font-extrabold tracking-wider text-slate-900';
+      } else {
+        nameEl.innerText = '候選人姓名';
+        nameEl.className = 'text-2xl md:text-3xl font-extrabold tracking-wider text-slate-300';
+      }
+
+      const roleEl = document.getElementById('pv-target-role');
+      if (resumeData.targetRole) {
+        roleEl.innerText = resumeData.targetRole;
+        roleEl.className = 'text-sm md:text-base font-bold text-blue-700 mt-1 uppercase tracking-wide';
+      } else {
+        roleEl.innerText = '目標應聘職務 (尚未填寫)';
+        roleEl.className = 'text-sm md:text-base font-bold text-blue-400/50 mt-1 uppercase tracking-wide';
+      }
+
+      const phoneEl = document.getElementById('pv-phone');
+      phoneEl.innerHTML = '<i class="fa-solid fa-phone ' + (resumeData.phone ? 'text-slate-400' : 'text-slate-300') + ' mr-1"></i>' + (resumeData.phone || '聯絡電話');
+      phoneEl.className = resumeData.phone ? 'text-slate-700' : 'text-slate-300';
+
+      const emailEl = document.getElementById('pv-email');
+      emailEl.innerHTML = '<i class="fa-solid fa-envelope ' + (resumeData.email ? 'text-slate-400' : 'text-slate-300') + ' mr-1"></i>' + (resumeData.email || '電子信箱');
+      emailEl.className = resumeData.email ? 'text-slate-700' : 'text-slate-300';
+
+      const locEl = document.getElementById('pv-location');
+      locEl.innerHTML = '<i class="fa-solid fa-location-dot ' + (resumeData.location ? 'text-slate-400' : 'text-slate-300') + ' mr-1"></i>' + (resumeData.location || '所在城市');
+      locEl.className = resumeData.location ? 'text-slate-700' : 'text-slate-300';
+
+      const linksEl = document.getElementById('pv-links');
+      linksEl.innerHTML = '<i class="fa-solid fa-link ' + (resumeData.links ? 'text-slate-400' : 'text-slate-300') + ' mr-1"></i>' + (resumeData.links || '作品集 / LinkedIn');
+      linksEl.className = resumeData.links ? 'text-slate-700' : 'text-slate-300';
 
       // 更新專業摘要
-      document.getElementById('pv-summary-text').innerText = resumeData.summary || '（請在左側填寫專業摘要，濃縮您的核心專業與量化戰績）';
+      const sumEl = document.getElementById('pv-summary-text');
+      if (resumeData.summary) {
+        sumEl.innerText = resumeData.summary;
+        sumEl.className = 'text-xs text-slate-700 leading-relaxed text-justify';
+      } else {
+        sumEl.innerText = '（尚未填寫職涯摘要，請在左側輸入或使用問答導引精靈一鍵生成）';
+        sumEl.className = 'text-xs text-slate-400 italic leading-relaxed text-justify';
+      }
 
       // 更新技能
-      document.getElementById('pv-skills-core').innerText = resumeData.skillsCore || '待補充';
-      document.getElementById('pv-skills-tools').innerText = resumeData.skillsTools || '待補充';
-      document.getElementById('pv-skills-lang').innerText = resumeData.skillsLang || '待補充';
+      const scEl = document.getElementById('pv-skills-core');
+      scEl.innerText = resumeData.skillsCore || '待補充';
+      scEl.className = resumeData.skillsCore ? 'flex-1 text-slate-700' : 'flex-1 text-slate-400 italic';
+
+      const stEl = document.getElementById('pv-skills-tools');
+      stEl.innerText = resumeData.skillsTools || '待補充';
+      stEl.className = resumeData.skillsTools ? 'flex-1 text-slate-700' : 'flex-1 text-slate-400 italic';
+
+      const slEl = document.getElementById('pv-skills-lang');
+      slEl.innerText = resumeData.skillsLang || '待補充';
+      slEl.className = resumeData.skillsLang ? 'flex-1 text-slate-700' : 'flex-1 text-slate-400 italic';
 
       // 更新經歷列表
       const expContainer = document.getElementById('pv-experience-container');
       expContainer.innerHTML = '';
       if (resumeData.experiences.length === 0) {
-        expContainer.innerHTML = '<div class="text-xs text-slate-400 italic">尚未新增工作經歷，請點選左側「新增工作經歷」...</div>';
+        expContainer.innerHTML = '<div class="text-xs text-slate-400 italic">尚未新增工作經歷。請於左側點擊「新增一段工作經歷」或頂部點擊「載入通用示範」快速帶入高階範例。</div>';
       } else {
         resumeData.experiences.forEach(exp => {
           const item = document.createElement('div');
@@ -732,6 +838,8 @@
             bulletsHtml = '<ul class="list-disc list-inside text-xs text-slate-700 space-y-1 mt-1.5">' +
               exp.bullets.map(b => '<li class="text-justify leading-relaxed">' + b + '</li>').join('') +
               '</ul>';
+          } else {
+            bulletsHtml = '<div class="text-[11px] text-slate-400 italic">尚未建立 STAR 成就條列</div>';
           }
 
           item.innerHTML = `
@@ -739,7 +847,7 @@
               <div class="font-bold text-slate-900 text-xs">
                 ${exp.role || '職稱'} <span class="text-slate-400 font-normal">|</span> <span class="text-blue-800 font-semibold">${exp.company || '公司名稱'}</span>
               </div>
-              <div class="text-slate-500 font-mono text-[11px]">${exp.period || '任職期間'}</div>
+              <div class="text-slate-500 font-mono text-[11px]">${exp.period || ''}</div>
             </div>
             ${bulletsHtml}
           `;
@@ -748,10 +856,24 @@
       }
 
       // 更新學歷
-      document.getElementById('pv-edu-school').innerText = resumeData.eduSchool || '學校名稱';
-      document.getElementById('pv-edu-degree').innerText = resumeData.eduDegree || '學系學位';
+      const schEl = document.getElementById('pv-edu-school');
+      schEl.innerText = resumeData.eduSchool || '學校名稱';
+      schEl.className = resumeData.eduSchool ? 'font-bold text-slate-900' : 'font-bold text-slate-400';
+
+      const degEl = document.getElementById('pv-edu-degree');
+      degEl.innerText = resumeData.eduDegree || '學系學位';
+      degEl.className = resumeData.eduDegree ? 'text-slate-700' : 'text-slate-400';
+
       document.getElementById('pv-edu-year').innerText = resumeData.eduYear || '';
-      document.getElementById('pv-edu-honor').innerText = resumeData.eduHonor ? '重大實作：' + resumeData.eduHonor : '';
+      
+      const honEl = document.getElementById('pv-edu-honor');
+      if (resumeData.eduHonor) {
+        honEl.innerText = '★ 重大成就/榮譽：' + resumeData.eduHonor;
+        honEl.classList.remove('hidden');
+      } else {
+        honEl.innerText = '';
+        honEl.classList.add('hidden');
+      }
 
       // 更新專案
       const projContainer = document.getElementById('pv-projects-list');
@@ -761,88 +883,153 @@
         lines.forEach(l => {
           const li = document.createElement('li');
           li.innerText = l.replace(/^[-*•]\s*/, '');
+          li.className = 'text-xs text-slate-700';
           projContainer.appendChild(li);
         });
       } else {
-        projContainer.innerHTML = '<li class="text-slate-400 italic">可填寫重要實務專案、策展或跨國業務成果。</li>';
+        projContainer.innerHTML = '<li class="text-slate-400 italic">可填寫重要實務專案、組織轉型或跨國業務成果。</li>';
       }
 
-      // 計算錦囊指標得分
+      // 計算錦囊指標得分與維度雷達
       evaluateResumeScore();
     }
 
-    // 計算錦囊得分
+    // 計算錦囊得分與五大維度雷達
     function evaluateResumeScore() {
-      let score = 0;
+      let dim1 = 0; // 基本定位 (20)
+      let dim2 = 0; // 目標鎖定 (15)
+      let dim3 = 0; // 摘要說服力 (20)
+      let dim4 = 0; // STAR 量化戰績 (35)
+      let dim5 = 0; // ATS 技能匹配 (10)
+
       let tips = [];
 
-      if (resumeData.name && resumeData.phone && resumeData.email) score += 20;
-      else tips.push('基本聯絡資訊不完整');
+      // 1. 基本資訊
+      if (resumeData.name) dim1 += 8;
+      if (resumeData.phone && resumeData.email) dim1 += 8;
+      if (resumeData.location || resumeData.links) dim1 += 4;
+      if (dim1 < 20) tips.push('基本聯絡與作品集未填滿');
 
-      if (resumeData.targetRole && resumeData.targetRole !== '目標應聘職務') score += 15;
-      else tips.push('缺少明確目標職務');
-
-      if (resumeData.summary && resumeData.summary.length >= 50) score += 20;
-      else tips.push('職涯摘要字數過短');
-
-      if (resumeData.experiences && resumeData.experiences.length > 0) {
-        score += 20;
-        // 檢查是否有包含量化數字
-        let hasNumbers = false;
-        resumeData.experiences.forEach(e => {
-          (e.bullets || []).forEach(b => {
-            if (/\d+%|\d+萬|\d+筆|\d+人|\d+天|\$\d+/.test(b)) hasNumbers = true;
-          });
-        });
-        if (hasNumbers) score += 15;
-        else tips.push('經歷缺少量化數據（%、金額或人數）');
+      // 2. 目標鎖定
+      if (resumeData.targetRole) {
+        dim2 += 15;
       } else {
-        tips.push('尚未填寫工作經歷');
+        tips.push('尚未設定明確應聘職務');
       }
 
-      if (resumeData.skillsCore && resumeData.skillsTools) score += 10;
-      else tips.push('技能盤點待完善');
+      // 3. 摘要說服力
+      if (resumeData.summary) {
+        if (resumeData.summary.length >= 80) dim3 = 20;
+        else if (resumeData.summary.length >= 40) dim3 = 12;
+        else dim3 = 6;
+      } else {
+        tips.push('職涯摘要空白');
+      }
 
-      score = Math.min(100, score);
+      // 4. STAR 經歷與量化戰績
+      if (resumeData.experiences && resumeData.experiences.length > 0) {
+        dim4 += 15; // 有經歷卡片
+        let hasNumbers = 0;
+        let totalBullets = 0;
+        resumeData.experiences.forEach(e => {
+          (e.bullets || []).forEach(b => {
+            totalBullets++;
+            if (/\d+%|\d+萬|\d+億|\d+筆|\d+人|\d+天|\$\d+|\d+倍/.test(b)) hasNumbers++;
+          });
+        });
+        if (hasNumbers >= 3) dim4 += 20;
+        else if (hasNumbers >= 1) dim4 += 12;
+        else tips.push('工作成就條列缺少具體量化數據（%、金額、倍數或人數）');
+      } else {
+        tips.push('尚未建立工作經歷');
+      }
+
+      // 5. ATS 關鍵字與技能
+      if (resumeData.skillsCore) dim5 += 5;
+      if (resumeData.skillsTools || resumeData.skillsLang) dim5 += 5;
+      if (dim5 < 10) tips.push('核心技能或工具尚未盤點');
+
+      const totalScore = dim1 + dim2 + dim3 + dim4 + dim5;
+
+      // 更新進度條
+      document.getElementById('radar-dim-1').innerText = dim1 + '/20';
+      document.getElementById('bar-dim-1').style.width = (dim1 / 20 * 100) + '%';
+
+      document.getElementById('radar-dim-2').innerText = dim2 + '/15';
+      document.getElementById('bar-dim-2').style.width = (dim2 / 15 * 100) + '%';
+
+      document.getElementById('radar-dim-3').innerText = dim3 + '/20';
+      document.getElementById('bar-dim-3').style.width = (dim3 / 20 * 100) + '%';
+
+      document.getElementById('radar-dim-4').innerText = dim4 + '/35';
+      document.getElementById('bar-dim-4').style.width = (dim4 / 35 * 100) + '%';
+
+      document.getElementById('radar-dim-5').innerText = dim5 + '/10';
+      document.getElementById('bar-dim-5').style.width = (dim5 / 10 * 100) + '%';
 
       const badge = document.getElementById('resume-score-badge');
       const tipEl = document.getElementById('resume-score-tip');
-      badge.innerText = score + ' 分 (' + (score >= 85 ? '極佳' : score >= 70 ? '良好' : '待完善') + ')';
-      if (score >= 85) {
-        badge.className = 'px-2 py-0.5 rounded font-bold bg-emerald-100 text-emerald-800';
-        tipEl.innerText = '完美符合求職錦囊標準，已可直接匯出投遞！';
-      } else if (score >= 70) {
-        badge.className = 'px-2 py-0.5 rounded font-bold bg-blue-100 text-blue-800';
-        tipEl.innerText = tips.join('；') || '整體結構完整！';
+
+      if (totalScore === 0) {
+        badge.className = 'px-2.5 py-0.5 rounded font-bold bg-slate-200 text-slate-700';
+        badge.innerText = '0 分 (尚未填寫)';
+        tipEl.innerText = '所有欄位目前為乾淨空白狀態。請在左側輸入資料，或點選頂部「載入通用示範」快速檢視高階經理人黃金標準範例。';
+      } else if (totalScore >= 85) {
+        badge.className = 'px-2.5 py-0.5 rounded font-bold bg-emerald-100 text-emerald-800';
+        badge.innerText = totalScore + ' 分 (黃金標準)';
+        tipEl.innerText = '完美符合高階求職錦囊標準，架構嚴謹且戰績完整量化，已可直接匯出 Word 投遞！';
+      } else if (totalScore >= 60) {
+        badge.className = 'px-2.5 py-0.5 rounded font-bold bg-blue-100 text-blue-800';
+        badge.innerText = totalScore + ' 分 (良好結構)';
+        tipEl.innerText = '建議強化：' + tips.slice(0, 2).join('；');
       } else {
-        badge.className = 'px-2 py-0.5 rounded font-bold bg-amber-100 text-amber-800';
-        tipEl.innerText = tips.join('；');
+        badge.className = 'px-2.5 py-0.5 rounded font-bold bg-amber-100 text-amber-800';
+        badge.innerText = totalScore + ' 分 (持續完善中)';
+        tipEl.innerText = '尚待補充：' + tips.slice(0, 2).join('；');
       }
     }
 
-    // 載入預設範本
-    function loadDemoData() {
-      document.getElementById('field-name').value = resumeData.name;
-      document.getElementById('field-en-name').value = resumeData.enName;
-      document.getElementById('field-phone').value = resumeData.phone;
-      document.getElementById('field-email').value = resumeData.email;
-      document.getElementById('field-location').value = resumeData.location;
-      document.getElementById('field-links').value = resumeData.links;
-      document.getElementById('field-target-role').value = resumeData.targetRole;
-      document.getElementById('field-availability').value = resumeData.availability;
-      document.getElementById('field-industry').value = resumeData.industry;
-      document.getElementById('field-summary').value = resumeData.summary;
-      document.getElementById('field-skills-core').value = resumeData.skillsCore;
-      document.getElementById('field-skills-tools').value = resumeData.skillsTools;
-      document.getElementById('field-skills-lang').value = resumeData.skillsLang;
-      document.getElementById('field-edu-school').value = resumeData.eduSchool;
-      document.getElementById('field-edu-degree').value = resumeData.eduDegree;
-      document.getElementById('field-edu-year').value = resumeData.eduYear;
-      document.getElementById('field-edu-honor').value = resumeData.eduHonor;
-      document.getElementById('field-projects').value = resumeData.projects;
-
+    // 清空欄位 (重設為空白)
+    function resetToEmpty() {
+      if (resumeData.name && !confirm('確定要清空所有已輸入的欄位與經歷，重設為空白狀態嗎？')) {
+        return;
+      }
+      resumeData = JSON.parse(JSON.stringify(emptyResume));
+      populateInputsFromData(resumeData);
       renderExperienceEditor();
       updateResume();
+      setTab(1);
+    }
+
+    // 載入通用示範資料 (高階經理人)
+    function loadDemoData() {
+      resumeData = JSON.parse(JSON.stringify(demoResume));
+      populateInputsFromData(resumeData);
+      renderExperienceEditor();
+      updateResume();
+      setTab(1);
+    }
+
+    // 將資料同步至左側輸入欄位
+    function populateInputsFromData(data) {
+      if (document.getElementById('field-name')) document.getElementById('field-name').value = data.name || '';
+      if (document.getElementById('field-en-name')) document.getElementById('field-en-name').value = data.enName || '';
+      if (document.getElementById('field-phone')) document.getElementById('field-phone').value = data.phone || '';
+      if (document.getElementById('field-email')) document.getElementById('field-email').value = data.email || '';
+      if (document.getElementById('field-location')) document.getElementById('field-location').value = data.location || '';
+      if (document.getElementById('field-links')) document.getElementById('field-links').value = data.links || '';
+      if (document.getElementById('field-target-role')) document.getElementById('field-target-role').value = data.targetRole || '';
+      if (document.getElementById('field-availability')) document.getElementById('field-availability').value = data.availability || '';
+      if (document.getElementById('field-industry')) document.getElementById('field-industry').value = data.industry || '';
+      if (document.getElementById('field-summary')) document.getElementById('field-summary').value = data.summary || '';
+      if (document.getElementById('field-skills-core')) document.getElementById('field-skills-core').value = data.skillsCore || '';
+      if (document.getElementById('field-skills-tools')) document.getElementById('field-skills-tools').value = data.skillsTools || '';
+      if (document.getElementById('field-skills-lang')) document.getElementById('field-skills-lang').value = data.skillsLang || '';
+      if (document.getElementById('field-edu-school')) document.getElementById('field-edu-school').value = data.eduSchool || '';
+      if (document.getElementById('field-edu-degree')) document.getElementById('field-edu-degree').value = data.eduDegree || '';
+      if (document.getElementById('field-edu-year')) document.getElementById('field-edu-year').value = data.eduYear || '';
+      if (document.getElementById('field-edu-honor')) document.getElementById('field-edu-honor').value = data.eduHonor || '';
+      if (document.getElementById('field-projects')) document.getElementById('field-projects').value = data.projects || '';
     }
 
     // 儲存草稿 JSON
@@ -850,7 +1037,7 @@
       const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(resumeData, null, 2));
       const downloadAnchor = document.createElement('a');
       downloadAnchor.setAttribute('href', dataStr);
-      downloadAnchor.setAttribute('download', (resumeData.name || '求職') + '_履歷草稿_' + new Date().toISOString().slice(0, 10) + '.json');
+      downloadAnchor.setAttribute('download', (resumeData.name || '高階求職') + '_履歷草稿_' + new Date().toISOString().slice(0, 10) + '.json');
       document.body.appendChild(downloadAnchor);
       downloadAnchor.click();
       downloadAnchor.remove();
@@ -864,8 +1051,10 @@
       reader.onload = function(e) {
         try {
           const loaded = JSON.parse(e.target.result);
-          resumeData = Object.assign(resumeData, loaded);
-          loadDemoData();
+          resumeData = Object.assign(JSON.parse(JSON.stringify(emptyResume)), loaded);
+          populateInputsFromData(resumeData);
+          renderExperienceEditor();
+          updateResume();
           alert('草稿已成功載入！');
         } catch (err) {
           alert('讀取 JSON 草稿失敗：' + err.message);
@@ -876,12 +1065,16 @@
 
     // 核心匯出 Word 功能
     async function exportToWord() {
+      if (!resumeData.name && !resumeData.targetRole && resumeData.experiences.length === 0) {
+        if (!confirm('目前履歷內容為空白，確定仍要匯出 Word 文件嗎？建議先填寫資料或載入示範。')) {
+          return;
+        }
+      }
+
       try {
         if (typeof docx !== 'undefined' && docx.Document) {
-          // 使用官方 docx.js 產出高階標準 .docx
           await generateStandardDocx();
         } else {
-          // 備援方案：產出原生 Office Word HTML/XML
           generateFallbackWordDoc();
         }
       } catch (err) {
@@ -896,13 +1089,13 @@
 
       const children = [];
 
-      // 1. 候選人姓名與目標職務
+      // 1. 候選人姓名
       children.push(new Paragraph({
         alignment: AlignmentType.CENTER,
         spacing: { before: 0, after: 80 },
         children: [
           new TextRun({
-            text: resumeData.name + (resumeData.enName ? ' (' + resumeData.enName + ')' : ''),
+            text: (resumeData.name || '候選人姓名') + (resumeData.enName ? ' (' + resumeData.enName + ')' : ''),
             bold: true,
             size: 36, // 18pt
             color: '0F172A',
@@ -912,34 +1105,38 @@
       }));
 
       // 目標職務
-      children.push(new Paragraph({
-        alignment: AlignmentType.CENTER,
-        spacing: { after: 120 },
-        children: [
-          new TextRun({
-            text: resumeData.targetRole || '',
-            bold: true,
-            size: 24, // 12pt
-            color: '1D4ED8',
-            font: 'Microsoft JhengHei'
-          })
-        ]
-      }));
+      if (resumeData.targetRole) {
+        children.push(new Paragraph({
+          alignment: AlignmentType.CENTER,
+          spacing: { after: 120 },
+          children: [
+            new TextRun({
+              text: resumeData.targetRole,
+              bold: true,
+              size: 24, // 12pt
+              color: '1D4ED8',
+              font: 'Microsoft JhengHei'
+            })
+          ]
+        }));
+      }
 
       // 聯絡列
       const contactText = [resumeData.phone, resumeData.email, resumeData.location, resumeData.links].filter(Boolean).join(' | ');
-      children.push(new Paragraph({
-        alignment: AlignmentType.CENTER,
-        spacing: { after: 240 },
-        children: [
-          new TextRun({
-            text: contactText,
-            size: 19, // 9.5pt
-            color: '475569',
-            font: 'Microsoft JhengHei'
-          })
-        ]
-      }));
+      if (contactText) {
+        children.push(new Paragraph({
+          alignment: AlignmentType.CENTER,
+          spacing: { after: 240 },
+          children: [
+            new TextRun({
+              text: contactText,
+              size: 19, // 9.5pt
+              color: '475569',
+              font: 'Microsoft JhengHei'
+            })
+          ]
+        }));
+      }
 
       // 標題樣式產生器
       function makeSectionHeader(title) {
@@ -978,51 +1175,51 @@
       }
 
       // 3. 核心競爭力 (Skills)
-      children.push(makeSectionHeader('核心競爭力與關鍵技能 (CORE COMPETENCIES & SKILLS)'));
-      if (resumeData.skillsCore) {
-        children.push(new Paragraph({
-          spacing: { after: 80 },
-          children: [
-            new TextRun({ text: '• 領域專長：', bold: true, size: 21, color: '0F172A', font: 'Microsoft JhengHei' }),
-            new TextRun({ text: resumeData.skillsCore, size: 21, color: '334155', font: 'Microsoft JhengHei' })
-          ]
-        }));
-      }
-      if (resumeData.skillsTools) {
-        children.push(new Paragraph({
-          spacing: { after: 80 },
-          children: [
-            new TextRun({ text: '• 工具軟體：', bold: true, size: 21, color: '0F172A', font: 'Microsoft JhengHei' }),
-            new TextRun({ text: resumeData.skillsTools, size: 21, color: '334155', font: 'Microsoft JhengHei' })
-          ]
-        }));
-      }
-      if (resumeData.skillsLang) {
-        children.push(new Paragraph({
-          spacing: { after: 160 },
-          children: [
-            new TextRun({ text: '• 語言證照：', bold: true, size: 21, color: '0F172A', font: 'Microsoft JhengHei' }),
-            new TextRun({ text: resumeData.skillsLang, size: 21, color: '334155', font: 'Microsoft JhengHei' })
-          ]
-        }));
+      if (resumeData.skillsCore || resumeData.skillsTools || resumeData.skillsLang) {
+        children.push(makeSectionHeader('核心競爭力與關鍵技能 (CORE COMPETENCIES & SKILLS)'));
+        if (resumeData.skillsCore) {
+          children.push(new Paragraph({
+            spacing: { after: 80 },
+            children: [
+              new TextRun({ text: '• 領域專長：', bold: true, size: 21, color: '0F172A', font: 'Microsoft JhengHei' }),
+              new TextRun({ text: resumeData.skillsCore, size: 21, color: '334155', font: 'Microsoft JhengHei' })
+            ]
+          }));
+        }
+        if (resumeData.skillsTools) {
+          children.push(new Paragraph({
+            spacing: { after: 80 },
+            children: [
+              new TextRun({ text: '• 工具軟體：', bold: true, size: 21, color: '0F172A', font: 'Microsoft JhengHei' }),
+              new TextRun({ text: resumeData.skillsTools, size: 21, color: '334155', font: 'Microsoft JhengHei' })
+            ]
+          }));
+        }
+        if (resumeData.skillsLang) {
+          children.push(new Paragraph({
+            spacing: { after: 160 },
+            children: [
+              new TextRun({ text: '• 語言證照：', bold: true, size: 21, color: '0F172A', font: 'Microsoft JhengHei' }),
+              new TextRun({ text: resumeData.skillsLang, size: 21, color: '334155', font: 'Microsoft JhengHei' })
+            ]
+          }));
+        }
       }
 
       // 4. 工作經歷 (Experience with STAR bullets)
       if (resumeData.experiences && resumeData.experiences.length > 0) {
         children.push(makeSectionHeader('專業工作經歷 (PROFESSIONAL EXPERIENCE)'));
         resumeData.experiences.forEach(exp => {
-          // 公司與職稱
           children.push(new Paragraph({
             spacing: { before: 140, after: 60 },
             children: [
               new TextRun({ text: exp.role || '職稱', bold: true, size: 22, color: '0F172A', font: 'Microsoft JhengHei' }),
               new TextRun({ text: ' | ', color: '94A3B8' }),
               new TextRun({ text: exp.company || '公司', bold: true, size: 22, color: '1E40AF', font: 'Microsoft JhengHei' }),
-              new TextRun({ text: '  (' + (exp.period || '') + ')', size: 19, color: '64748B', font: 'Microsoft JhengHei' })
+              new TextRun({ text: exp.period ? '  (' + exp.period + ')' : '', size: 19, color: '64748B', font: 'Microsoft JhengHei' })
             ]
           }));
 
-          // 條列成就
           if (exp.bullets && exp.bullets.length > 0) {
             exp.bullets.forEach(b => {
               children.push(new Paragraph({
@@ -1038,23 +1235,25 @@
       }
 
       // 5. 學歷與榮譽
-      children.push(makeSectionHeader('學歷背景與重大榮譽 (EDUCATION & HONORS)'));
-      children.push(new Paragraph({
-        spacing: { before: 80, after: 60 },
-        children: [
-          new TextRun({ text: resumeData.eduSchool || '', bold: true, size: 21, color: '0F172A', font: 'Microsoft JhengHei' }),
-          new TextRun({ text: ' — ', color: '94A3B8' }),
-          new TextRun({ text: resumeData.eduDegree || '', size: 21, color: '334155', font: 'Microsoft JhengHei' }),
-          new TextRun({ text: resumeData.eduYear ? ' (' + resumeData.eduYear + ')' : '', size: 19, color: '64748B', font: 'Microsoft JhengHei' })
-        ]
-      }));
-      if (resumeData.eduHonor) {
+      if (resumeData.eduSchool || resumeData.eduDegree) {
+        children.push(makeSectionHeader('學歷背景與重大榮譽 (EDUCATION & HONORS)'));
         children.push(new Paragraph({
-          spacing: { after: 120 },
+          spacing: { before: 80, after: 60 },
           children: [
-            new TextRun({ text: '  ★ 重大實作/榮譽：' + resumeData.eduHonor, size: 19, color: '1D4ED8', font: 'Microsoft JhengHei' })
+            new TextRun({ text: resumeData.eduSchool || '', bold: true, size: 21, color: '0F172A', font: 'Microsoft JhengHei' }),
+            new TextRun({ text: resumeData.eduSchool && resumeData.eduDegree ? ' — ' : '', color: '94A3B8' }),
+            new TextRun({ text: resumeData.eduDegree || '', size: 21, color: '334155', font: 'Microsoft JhengHei' }),
+            new TextRun({ text: resumeData.eduYear ? ' (' + resumeData.eduYear + ')' : '', size: 19, color: '64748B', font: 'Microsoft JhengHei' })
           ]
         }));
+        if (resumeData.eduHonor) {
+          children.push(new Paragraph({
+            spacing: { after: 120 },
+            children: [
+              new TextRun({ text: '  ★ 重大成就/榮譽：' + resumeData.eduHonor, size: 19, color: '1D4ED8', font: 'Microsoft JhengHei' })
+            ]
+          }));
+        }
       }
 
       // 6. 重大專案與代表實績
@@ -1083,7 +1282,7 @@
         sections: [{
           properties: {
             page: {
-              margin: { top: 1200, right: 1200, bottom: 1200, left: 1200 } // 1.2 cm 邊界
+              margin: { top: 1200, right: 1200, bottom: 1200, left: 1200 }
             }
           },
           children: children
@@ -1091,7 +1290,7 @@
       });
 
       const blob = await Packer.toBlob(doc);
-      downloadBlob(blob, resumeData.name + '_求職履歷_' + (resumeData.targetRole || '專業版') + '.docx');
+      downloadBlob(blob, (resumeData.name || '候選人') + '_求職履歷_' + (resumeData.targetRole || '專業版') + '.docx');
     }
 
     // 備援相容 Word 下載
@@ -1101,7 +1300,7 @@
         <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
         <head>
           <meta charset='utf-8'>
-          <title>${resumeData.name} 履歷表</title>
+          <title>${resumeData.name || '候選人'} 履歷表</title>
           <style>
             body { font-family: '微軟正黑體', 'Microsoft JhengHei', Arial, sans-serif; line-height: 1.5; color: #1e293b; }
             h1 { font-size: 22pt; margin-bottom: 4px; text-align: center; color: #0f172a; }
@@ -1117,7 +1316,7 @@
         </html>
       `;
       const blob = new Blob(['\ufeff' + fullWordHtml], { type: 'application/msword' });
-      downloadBlob(blob, resumeData.name + '_求職履歷_' + (resumeData.targetRole || '專業版') + '.doc');
+      downloadBlob(blob, (resumeData.name || '候選人') + '_求職履歷_' + (resumeData.targetRole || '專業版') + '.doc');
     }
 
     // 通用 Blob 下載器
@@ -1134,9 +1333,9 @@
       }, 100);
     }
 
-    // 初始化載入
+    // 進入頁面時初始清空為空白狀態
     window.addEventListener('DOMContentLoaded', () => {
-      loadDemoData();
+      resetToEmpty();
     });
   </script>
 </body>
